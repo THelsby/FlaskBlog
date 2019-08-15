@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div>
+<h2>REGISTER PAGE</h2>
+<form method="POST" action="">
+  {% for field in form %}
+    {{ field.label }}
+    {{ field }}
+    {% if field.errors %}
+    {% for error in field.errors %}
+      <span>{{ error }} </span>
+      {% endfor %}
+    {% else %}
+    {% endif %}
+    <br>
+  {% endfor %}
+  <br>
+</form>
+</div>
+{% endblock content %}

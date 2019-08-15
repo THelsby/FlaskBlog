@@ -1,0 +1,27 @@
+<h3>{{ post.title }}</h3>
+{% if current_user.id == post.author.id %}
+  <div>
+    <form method="POST" action="">
+      {% for field in form %}
+        {{ field.label }}
+        {{ field }}
+        {% if field.errors %}
+        {% for error in field.errors %}
+          <span>{{ error }} </span>
+          {% endfor %}
+        {% else %}
+        {% endif %}
+        <br>
+      {% endfor %}
+      <br>
+    </form>
+  </div>
+{% else %}
+  <p><b>By:</b><i>{{ post.author.first_name }} {{ post.author.last_name}}</i></p>
+  <p><b>On the </b>{{ post.date_posted }}</p>
+  {% if post.content|length < 500 %}
+    <p>{{ post.content }} </p>
+  {% else %}
+    <p>{{ post.content[0:500] }}... </p>
+  {% endif %}
+{% endif %}
