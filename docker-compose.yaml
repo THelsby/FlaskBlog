@@ -1,0 +1,40 @@
+version: '3.6'
+services:
+  app:
+    image: thelsby/flaskblog
+    ports:
+    - target: 5000
+      published: 5000
+    environment:
+      FLASK_APP: application/run.py
+    networks:
+    - blog
+    depends_on:
+    - mysql
+    container_name: app
+  mysql:
+    image: mysql:5.7
+    ports:
+    - target: 3306
+    environment:
+      MYSQL_DATABASE: blog
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+    - blog
+    container_name: mysql
+  jenkins:
+    image: jenkins/jenkins:latest
+    ports:
+    - target: 8080
+      published: 8080
+    volumes:
+    - type: volume
+      source: jenkins-home
+      target: "/var/jenkins_home"
+    - type: bind
+      source: "/var/run/docker.sock"
+      target: "/var/run/docker.sock" 
+networks:
+  blog:
+volumes:
+  jenkins-home:
