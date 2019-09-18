@@ -4,7 +4,7 @@ RUN python3 -m venv venv
 
 COPY . .
 
-RUN  "$(pwd)/venv/bin/pip3" install -r requirements
+RUN  "$(pwd)venv/bin/pip3" install -r requirements
 
 EXPOSE 5000
 
